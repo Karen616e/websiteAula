@@ -100,7 +100,7 @@ export default function HeaderAndFooter() {
                 interestSites.map((site) => (
                   <li key={site.name} className="flex items-center gap-0.5">
                     <LinkIcon className="w-4 h-4"/>
-                    <a href={site.link} className="hover:underline">
+                    <a href={site.link} target="_blank" className="hover:underline">
                       {site.name}
                     </a>
                   </li>
@@ -114,9 +114,9 @@ export default function HeaderAndFooter() {
         <section className="flex-[0.3] grid grid-cols-[6fr_4fr] gap-2">
           <div className="text-[14px]">
             Todos los derechos reservados Copyright © 2025 / 
-            <a href="https://www.ingenieria.unam.mx/"> Facultad de Ingeniería </a>
+            <a href="https://www.ingenieria.unam.mx/" target="_blank" rel="noopener"> Facultad de Ingeniería </a>
             /
-            <a href="https://www.unam.mx/"> UNAM </a>
+            <a href="https://www.unam.mx/" target="_blank" rel="noopener"> UNAM </a>
             /
           </div>
 
@@ -126,7 +126,7 @@ export default function HeaderAndFooter() {
               icon: Icon,
               link,
             }) => (
-              <a key={name} href={link} aria-label={name} className="hover:text-blue-400">
+              <a key={name} href={link} aria-label={name} target="_blank" className="hover:text-blue-400">
                 <Icon />
               </a>
             ))}
