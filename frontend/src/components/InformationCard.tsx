@@ -1,4 +1,7 @@
+import { Link } from "react-router-dom";
+
 type InformationCardProps = {
+  id: number;
   name: string;
   position: string;
   description: string;
@@ -6,6 +9,7 @@ type InformationCardProps = {
 };
 
 const InformationCard = ({
+  id,
   name,
   position,
   description,
@@ -22,7 +26,11 @@ const InformationCard = ({
         />
       </div>
       <div className="text-center md:text-left">
-        <h3 className="text-xl font-semibold text-gray-900">{name}</h3>
+        <Link
+          to={`/profesores/${id}`}
+          className="block">
+          <h3 className="text-xl font-semibold text-gray-900">{name}</h3>
+        </Link>
         <p className="text-blue-600 text-md font-medium mb-2">{position}</p>
         <p className="text-gray-700 text-sm leading-relaxed">{description}</p>
       </div>
