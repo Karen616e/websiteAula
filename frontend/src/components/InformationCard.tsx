@@ -32,7 +32,7 @@ const InformationCard = ({
           <h3 className="text-xl font-semibold text-gray-900">{name}</h3>
         </Link>
         <p className="text-blue-600 text-md font-medium mb-2">{position}</p>
-        <p className="text-gray-700 text-sm leading-relaxed">{description}</p>
+        <p className="text-gray-700 text-sm leading-relaxed">{description.split('\n')[0]}</p>
       </div>
     </div>
   );
