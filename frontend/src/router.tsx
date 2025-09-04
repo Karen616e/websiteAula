@@ -3,22 +3,21 @@ import Inicio from "./views/Inicio";
 
 import HeaderAndFooter from "./layouts/HeaderAndFooter";
 import Clases from "./views/Clases";
-import Coordinacion from "./views/Coordinacion";
+import HeaderAndForMain from "./layouts/HeaderAndForMain";
 import Profesores from "./views/Profesores";
-import ProfessorDetails from "./components/ProfessorDetails";
+import Coordinacion from "./views/Coordinacion";
 
 export default function Router(){
     return(
     <BrowserRouter>
         <Routes>
-            <Route element={<HeaderAndFooter />}>
+            <Route element={<HeaderAndForMain />}>
                 <Route path='/inicio' element={<Inicio />} />
+            </Route>
+            <Route element={<HeaderAndFooter />}>
                 <Route path='/clases' element={<Clases />} />
-                <Route path='/coordinacion' element={<Coordinacion />} />
-                <Route path='coordinacion/:id' element={<ProfessorDetails />} />
                 <Route path='/profesores' element={<Profesores />} />
-                <Route path='/profesores/:id' element={<ProfessorDetails />} />
-
+                <Route path='/coordinacion' element={<Coordinacion />} />
             </Route> 
         </Routes>
     </BrowserRouter>
