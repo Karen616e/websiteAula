@@ -8,11 +8,11 @@ export default function HeaderAndForMain() {
             <header
                 className="relative z-10 bg-transparent py-2"
                 style={{
-                    height: "100vh", // Full viewport height for the header
+                    height: "100vh", 
                     backgroundImage: "url('/main-page/cisco-main.jpg')", 
-                    backgroundSize: "cover",  // Ensure the image covers the entire area
-                    backgroundPosition: "center",  // Center the image
-                    backgroundAttachment: "fixed",  // Parallax effect
+                    backgroundSize: "cover",  
+                    backgroundPosition: "center",  
+                    backgroundAttachment: "fixed",  
                 }}
             >
                 <div className="absolute inset-0 bg-black opacity-30"></div> {/* Optional dark overlay for better readability */}
