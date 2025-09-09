@@ -15,7 +15,7 @@ export default function HeaderAndForMain() {
                     backgroundAttachment: "fixed",  
                 }}
             >
-                <div className="absolute inset-0 bg-black opacity-30"></div> 
+                <div className="absolute inset-0 bg-black opacity-0"></div> 
                 <div className="mx-auto max-w-5xl flex items-center md:justify-between relative z-20">
                     <div className="hidden md:flex space-x-4">
                         <img src="/EscudoUNAMBlanco.png" className="h-26 w-auto" />
