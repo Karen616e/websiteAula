@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { LinkIcon } from "@heroicons/react/20/solid";
 import {
   FaFacebookF,
@@ -51,21 +52,28 @@ export default function HeaderAndForMain() {
     },
   ];
 
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 40);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
     <>
-      {/* Parallax background in the header */}
+      {/* Sticky header, always same height */}
       <header
-        className="relative z-10 bg-transparent py-2"
+        className={`sticky top-0 z-50 transition-colors duration-300 ${
+          isScrolled ? "bg-gray-900 bg-opacity-90" : "bg-transparent"
+        } py-2`}
         style={{
-          height: "100vh",
-          backgroundImage: "url('/main-page/cisco-main.jpg')",
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          backgroundAttachment: "fixed",
+          height: "7rem",
         }}
       >
-        <div className="absolute inset-0 bg-black opacity-0"></div>
-        <div className="mx-auto max-w-9/12 flex items-center md:justify-between relative z-20">
+        <div className="mx-auto max-w-9/12 flex items-center md:justify-between relative z-20 h-full">
           <div className="hidden md:flex space-x-7">
             <img
               src="/EscudoUNAMBlanco.png"
@@ -89,7 +97,20 @@ export default function HeaderAndForMain() {
         </div>
       </header>
 
-      <div className="bg-gray-100  min-h-screen py-2">
+      {/* Hero section for parallax image, only visible before scrolling */}
+      {!isScrolled && (
+        <section
+          className="w-full h-[calc(100vh-7rem)] bg-cover bg-center"
+          style={{
+            backgroundImage: "url('/main-page/cisco-main.jpg')",
+            backgroundAttachment: "fixed",
+          }}
+        >
+          {/* You can add overlay/text here if needed */}
+        </section>
+      )}
+
+      <div className="bg-gray-100 min-h-screen py-2">
         <main className="mx-auto max-w p-10 md:p-0">
           <div className="flex flex-col md:flex-row gap-10 mt-10">
             <div className="flex-1 ">
@@ -153,7 +174,6 @@ export default function HeaderAndForMain() {
 
         {/* Copyrights & Social Media */}
         <section className="flex flex-col items-center gap-4 text-sm text-center md:flex-row md:justify-between md:text-left">
-          {/* Contenedor del Copyright */}
           <div className="md:flex-[0.6]">
             Todos los derechos reservados Copyright © 2025 /
             <a
