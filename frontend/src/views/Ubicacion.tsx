@@ -11,7 +11,7 @@ export default function Ubicacion() {
          Ubicación
         </h1>
 
-        <p className="font-sans text-lg md:text-2xl text-center max-w-4xl font-extralight mb-10">
+        <p className="font-sans text-lg md:text-2xl text-center max-w-6xl font-extralight mb-10">
         El Aula Híbrida CISCO se encuentra en el segundo piso del edificio Q (Ing. Luis G. Valdés Vallejo) de la División de Ingeniería Eléctrica, FI, UNAM.
         </p>
 

@@ -7,6 +7,9 @@ import HeaderAndForMain from "./layouts/HeaderAndForMain";
 import Profesores from "./views/Profesores";
 import Coordinacion from "./views/Coordinacion";
 import Ubicacion from "./views/Ubicacion";
+import AlgoDay from "./views/AlgoDay";
+import AlgoRand from "./views/AlgoRand";
+import Inauguracion from "./views/Inauguracion";
 import ScrollToTop from "./components/ScrollToTop"; // Importa el componente
 
 export default function Router(){
@@ -22,6 +25,11 @@ export default function Router(){
                 <Route path='/profesores' element={<Profesores />} />
                 <Route path='/coordinacion' element={<Coordinacion />} />
                 <Route path='/ubicacion' element={<Ubicacion />} />
+                <Route path='/algoday' element={<AlgoDay />} />
+                <Route path='/algorand' element={<AlgoRand />} />
+                <Route path='/inauguracion' element={<Inauguracion />} />
+            </Route>
+            <Route path='*' element={<Inicio />}>
             </Route> 
         </Routes>
     </BrowserRouter>
