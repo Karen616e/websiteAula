@@ -10,9 +10,9 @@ import { Outlet } from "react-router";
 import NavigationForMain from "../components/NavigationForMain"; 
 
 export default function HeaderAndForMain() {
-  // Lógica para el efecto parallax
-  const [offsetY, setOffsetY] = useState(0);
-  const handleScroll = () => setOffsetY(window.pageYOffset);
+  // Lógica para el efecto parallax (sigue en Inicio.tsx, pero el header la necesita)
+  const [offsetY, setOffsetY] = useState(0); // Esta lógica en realidad ya no es necesaria aquí si se mudó a Inicio.tsx
+  const handleScroll = () => setOffsetY(window.pageYOffset); // Podríamos limpiar esto, pero no hace daño
 
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);
@@ -31,7 +31,7 @@ export default function HeaderAndForMain() {
     return () => window.removeEventListener("scroll", checkScroll);
   }, []);
 
-  // Arrays de datos para el footer
+  // Arrays de datos para el footer (sin cambios)
   const interestSites = [
     { name: "ANFEI", link: "https://www.anfei.mx" },
     { name: "CACEI", link: "https://cacei.com.mx" },
@@ -47,25 +47,23 @@ export default function HeaderAndForMain() {
   ];
 
   return (
-    // 'isolate' crea un nuevo contexto de apilamiento
     <div className="w-full isolate">
       
-      {/* 1. IMAGEN DE FONDO (YA NO ESTÁ AQUÍ, ESTÁ EN INICIO.TSX) */}
-
-      {/* 2. HEADER STICKY */}
+      {/* 2. HEADER STICKY (Con dimensiones actualizadas) */}
       <header
         className={`sticky top-0 z-50 transition-colors duration-300 ${
-          // --- AQUÍ ESTÁ EL CAMBIO ---
-          // Cambiamos 'bg-transparent' por 'bg-black bg-opacity-30'
-          // para dar un fondo sutil al header en estado inicial.
           isScrolled ? "bg-gray-900 bg-opacity-90" : "bg-black bg-opacity-30"
         } py-2`}
         style={{ height: "7rem" }}
       >
-        <div className="mx-auto max-w-7xl flex items-center justify-between px-4 sm:px-6 lg:px-8 h-full">
-          <div className="hidden md:flex space-x-7 items-center">
-            <img src="/EscudoUNAMBlanco.png" alt="UNAM" className="h-24 w-auto"/>
-            <img src="/EscudoFIBlanco.png" alt="Facultad de Ingeniería" className="h-24 w-auto"/>
+        {/* --- CAMBIOS EN ESTA LÍNEA --- */}
+        {/* 1. Cambiado 'max-w-7xl' a 'max-w-5xl' */}
+        {/* 2. Eliminado padding 'px-4 sm:px-6 lg:px-8' */}
+        <div className="mx-auto max-w-5xl flex items-center justify-between h-full">
+          {/* 3. Cambiado 'space-x-7' a 'space-x-4' y 'h-24' a 'h-23' */}
+          <div className="hidden md:flex space-x-4 items-center">
+            <img src="/EscudoUNAMBlanco.png" alt="UNAM" className="h-23 w-auto"/>
+            <img src="/EscudoFIBlanco.png" alt="Facultad de Ingeniería" className="h-23 w-auto"/>
           </div>
           <div>
             <NavigationForMain />
@@ -74,14 +72,14 @@ export default function HeaderAndForMain() {
         </div>
       </header>
       
-      {/* 3. CONTENIDO PRINCIPAL (Outlet) */}
+      {/* 3. CONTENIDO PRINCIPAL (Outlet) (sin cambios) */}
       <div className="relative z-10">
         <main>
           <Outlet />
         </main>
       </div>
 
-      {/* 4. FOOTER */}
+      {/* 4. FOOTER (sin cambios, ya era consistente) */}
       <footer className="relative z-10 w-full px-4 py-4 bg-gray-800 flex flex-col gap-4 text-white font-serif md:px-8">
         <section className="flex flex-col gap-4 text-sm md:grid md:grid-cols-[1fr_2fr_1fr] md:gap-4">
           <div className="flex justify-center items-center">

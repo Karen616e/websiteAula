@@ -1,5 +1,5 @@
-import InformationCard from "../components/InformationCard";
-import professors from "../data/professorsData";
+import InformationCard from "../../components/InformationCard";
+import professors from "../../data/professorsData";
 
 export default function Coordinacion() {
   const professor = professors.filter((professor) => professor.type === 1 || professor.type === 3);

@@ -66,13 +66,16 @@ const MissionText: React.FC<MissionTextProps> = ({
           )}
         </div>
         
+        {/* === CAMBIOS EN ESTE BLOQUE === */}
         {/* Contenedor de imagen */}
         <div className={`w-full lg:w-1/2 rounded overflow-hidden shadow-lg 
-          ${imageContainerClasses} order-1 mb-6 lg:mb-0 relative z-10`}>
+          ${imageContainerClasses} order-1 mb-6 lg:mb-0 relative z-10 
+          bg-gray-100 h-64 lg:h-80`} // 1. Añadimos bg-gray-100 y movimos la altura aquí
+        >
           <img 
             src={imageUrl} 
             alt="Illustration" 
-            className="w-full h-64 lg:h-80 object-cover" 
+            className="w-full h-full object-contain p-4" // 2. Cambiamos a h-full, object-contain y añadimos un padding
           />
         </div>
       </div>

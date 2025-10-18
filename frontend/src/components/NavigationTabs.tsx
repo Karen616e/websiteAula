@@ -19,8 +19,8 @@ const tabs = [
     name: "Plantilla Educativa",
     icon: BriefcaseIcon,
     children: [
-      { name: "Coordinación", href: "/coordinacion", icon: BuildingLibraryIcon },
-      { name: "Profesores", href: "/profesores", icon: PencilIcon },
+      { name: "Coordinación", href: "/plantilla/coordinacion", icon: BuildingLibraryIcon },
+      { name: "Profesores", href: "/plantilla/profesores", icon: PencilIcon },
     ],
   },
   // --- AÑADIR ESTE BLOQUE ---
@@ -28,9 +28,9 @@ const tabs = [
     name: "Eventos",
     icon: CalendarDaysIcon, // Icono principal del menú
     children: [
-      { name: "Inauguración", href: "/inauguracion", icon: SparklesIcon },
-      { name: "AlgoRand", href: "/algorand", icon: SparklesIcon },
-      { name: "AlgoDay", href: "/algoday", icon: SparklesIcon },
+      { name: "Inauguración", href: "/eventos/inauguracion", icon: SparklesIcon },
+      { name: "AlgoRand", href: "/eventos/algorand", icon: SparklesIcon },
+      { name: "AlgoDay", href: "/eventos/algoday", icon: SparklesIcon },
     ],
   },
   // -------------------------

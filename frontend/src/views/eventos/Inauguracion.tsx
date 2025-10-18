@@ -1,6 +1,6 @@
 import { AcademicCapIcon, MapPinIcon, SparklesIcon } from '@heroicons/react/20/solid';
 
-// Datos de los puntos clave para que sea más fácil de mantener
+// Datos de los puntos clave (sin cambios)
 const features = [
   {
     name: 'Educación Híbrida Pionera',
@@ -40,8 +40,19 @@ export default function Inauguracion() {
             <span><strong>Lugar:</strong> Anexo de la Facultad de Ingeniería</span>
         </div>
 
+        {/* === IMAGEN PRINCIPAL (NUEVA SECCIÓN) === */}
+        <div className="mx-auto mt-16 max-w-4xl">
+          <img
+            src="/events/inauguracion/inc1.jpeg"
+            alt="Inauguración del Aula Híbrida Cisco"
+            // Clases para hacerla impactante: ratio 16:9, esquinas redondeadas y sombra
+            className="w-full aspect-[16/9] rounded-2xl shadow-xl object-cover"
+          />
+        </div>
+
         {/* === SECCIÓN "LO QUE PUEDES ESPERAR" === */}
-        <div className="mx-auto mt-16 max-w-2xl sm:mt-20 lg:mt-24 lg:max-w-none">
+        {/* (Añadí un poco más de margen superior para separar de la nueva imagen) */}
+        <div className="mx-auto mt-20 max-w-2xl sm:mt-24 lg:mt-32 lg:max-w-none">
           <h3 className="text-2xl font-bold tracking-tight text-gray-900 text-center mb-12 sm:text-3xl">
             Lo que puedes esperar
           </h3>
@@ -60,17 +71,28 @@ export default function Inauguracion() {
           </dl>
         </div>
 
-        {/* === SECCIÓN DE GALERÍA === */}
-        <div className="mx-auto mt-16 max-w-2xl sm:mt-20 lg:mt-24">
+        {/* === SECCIÓN DE GALERÍA (MODIFICADA) === */}
+        <div className="mx-auto mt-16 max-w-10xl sm:mt-20 lg:mt-24">
             <h3 className="text-2xl font-bold tracking-tight text-gray-900 text-center mb-12 sm:text-3xl">
                 Galería del Evento
             </h3>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                {/* Reemplaza los `div` con tus etiquetas <img> */}
-                <div className="h-40 bg-gray-200 rounded-lg flex items-center justify-center text-gray-500">Imagen 1</div>
-                <div className="h-40 bg-gray-200 rounded-lg flex items-center justify-center text-gray-500">Imagen 2</div>
-                <div className="h-40 bg-gray-200 rounded-lg flex items-center justify-center text-gray-500">Imagen 3</div>
-                <div className="h-40 bg-gray-200 rounded-lg flex items-center justify-center text-gray-500">Imagen 4</div>
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+                {/* Ahora la galería empieza desde la imagen 2 */}
+                <img 
+                  src="/events/inauguracion/inc2.jpeg" 
+                  alt="Galería Inauguración 2" 
+                  className="w-full h-80 object-cover rounded-lg shadow-md"
+                />
+                <img 
+                  src="/events/inauguracion/inc3.png" 
+                  alt="Galería Inauguración 3" 
+                  className="w-full h-80 object-cover rounded-lg shadow-md"
+                />
+                <img 
+                  src="/events/inauguracion/inc4.jpeg" 
+                  alt="Galería Inauguración 4" 
+                  className="w-full h-80 object-cover rounded-lg shadow-md"
+                />
             </div>
         </div>
 

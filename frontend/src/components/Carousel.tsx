@@ -1,8 +1,16 @@
 import { useEffect, useState, useRef } from "react"
 
+// 1. CORRECCIÓN DE RUTAS:
+// Las rutas a archivos en 'public' deben ser absolutas desde la raíz (/)
+// No deben incluir la palabra 'public'.
 const images = [
-    "/public/carousel/CiscoPlaca.jpeg",
-    "/public/carousel/ebsite.png"
+    "/carousel/CiscoPlaca.jpeg",
+    "/carousel/CiscoInicio1.png",
+    "/carousel/CiscoInicio2.jpeg",
+    "/carousel/CiscoInicio3.png",
+    "/carousel/CiscoInicio4.png",
+    "/carousel/CiscoInicio5.png",
+    "/carousel/CiscoInicio6.png"
 ]
 
 export default function Carousel(){
@@ -36,11 +44,21 @@ export default function Carousel(){
     return(
         <div className="flex flex-col items-center mt-20">
             <div
-                className="w-full max-w-xl h-64 flex items-center justify-center bg-gray-100 rounded-lg overflow-hidden relative"
+                // 2. CAMBIOS DE TAMAÑO:
+                // - Cambiamos 'max-w-xl' a 'max-w-5xl' (más ancho)
+                // - Reemplazamos 'h-64' con 'aspect-video' (relación 16:9)
+                className="w-full max-w-5xl aspect-video flex items-center justify-center bg-gray-100 rounded-lg overflow-hidden relative"
                 onMouseEnter={() => setIsHovered(true)}
                 onMouseLeave={() => setIsHovered(false)} 
             >
-                <img src={images[current]} alt={`Imagen ${current + 1}`} className="object-contain h-fit w-fit" />
+                <img 
+                    src={images[current]} 
+                    alt={`Imagen ${current + 1}`} 
+                    // 3. CAMBIO DE CLASES DE IMAGEN:
+                    // 'object-contain' para evitar que se corte
+                    // 'w-full h-full' para que llene el contenedor
+                    className="object-contain w-full h-full" 
+                />
 
                 {isHovered && (
                     <>

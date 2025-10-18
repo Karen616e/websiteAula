@@ -4,13 +4,13 @@ import Inicio from "./views/Inicio";
 import HeaderAndFooter from "./layouts/HeaderAndFooter";
 import Clases from "./views/Clases";
 import HeaderAndForMain from "./layouts/HeaderAndForMain";
-import Profesores from "./views/Profesores";
-import Coordinacion from "./views/Coordinacion";
+import Profesores from "./views/plantilla/Profesores";
+import Coordinacion from "./views/plantilla/Coordinacion";
 import Ubicacion from "./views/Ubicacion";
-import AlgoDay from "./views/AlgoDay";
-import AlgoRand from "./views/AlgoRand";
-import Inauguracion from "./views/Inauguracion";
-import ScrollToTop from "./components/ScrollToTop"; // Importa el componente
+import AlgoDay from "./views/eventos/AlgoDay";
+import AlgoRand from "./views/eventos/AlgoRand";
+import Inauguracion from "./views/eventos/Inauguracion";
+import ScrollToTop from "./components/ScrollToTop"; 
 
 export default function Router(){
     return(
@@ -22,12 +22,12 @@ export default function Router(){
             </Route>
             <Route element={<HeaderAndFooter />}>
                 <Route path='/clases' element={<Clases />} />
-                <Route path='/profesores' element={<Profesores />} />
-                <Route path='/coordinacion' element={<Coordinacion />} />
+                <Route path='/plantilla/profesores' element={<Profesores />} />
+                <Route path='/plantilla/coordinacion' element={<Coordinacion />} />
                 <Route path='/ubicacion' element={<Ubicacion />} />
-                <Route path='/algoday' element={<AlgoDay />} />
-                <Route path='/algorand' element={<AlgoRand />} />
-                <Route path='/inauguracion' element={<Inauguracion />} />
+                <Route path='/eventos/algoday' element={<AlgoDay />} />
+                <Route path='/eventos/algorand' element={<AlgoRand />} />
+                <Route path='/eventos/inauguracion' element={<Inauguracion />} />
             </Route>
             <Route path='*' element={<Inicio />}>
             </Route> 

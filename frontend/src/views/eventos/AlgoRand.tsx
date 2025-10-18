@@ -57,16 +57,18 @@ export default function AlgoRand() {
             </dl>
         </div>
         
-        {/* === IMAGEN PRINCIPAL === */}
+        {/* === IMAGEN PRINCIPAL (MODIFICADA) === */}
         <div className="mx-auto mt-16 max-w-4xl">
-            <div className="aspect-[16/9] w-full rounded-2xl bg-gray-200 flex items-center justify-center">
-                {/* Reemplaza este div con tu etiqueta <img> */}
-                <span className="text-gray-500">Aquí va una imagen del workshop</span>
-            </div>
+            {/* Reemplazamos el div con la etiqueta <img> */}
+            <img
+              src="/events/algorand/algoRand.png" 
+              alt="Flyer del evento Algorand"
+              className="w-full aspect-[16/9] rounded-2xl shadow-xl object-cover"
+            />
         </div>
 
         {/* === SECCIÓN "LO QUE PUEDES ESPERAR" === */}
-        <div className="mx-auto mt-16 max-w-2xl sm:mt-20 lg:mt-24 lg:max-w-none">
+        <div className="mx-auto mt-20 max-w-2xl sm:mt-24 lg:mt-32 lg:max-w-none">
           <h3 className="text-2xl font-bold tracking-tight text-gray-900 text-center mb-12 sm:text-3xl">
             Lo que puedes esperar
           </h3>

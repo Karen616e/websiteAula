@@ -54,7 +54,7 @@ export default function Inicio() {
           <MissionText
             title="Enseñanza Híbrida"
             content="Nuestra misión es proporcionar una experiencia educativa de alta calidad que combine lo mejor de la enseñanza presencial y a distancia, adaptándonos a las necesidades cambiantes de los estudiantes y profesores. Buscamos fomentar un entorno de aprendizaje inclusivo, accesible y flexible, utilizando tecnología avanzada para facilitar la interacción y colaboración entre todos los participantes."
-            imageUrl="/carousel/ebsite.png"
+            imageUrl="/inicio/examen.png"
             imagePosition="right"
             buttonText="Conocer las clases"
             buttonLink="/clases"
@@ -63,7 +63,7 @@ export default function Inicio() {
           <MissionText
             title="Flexibilidad y Accesibilidad"
             content="Reconocemos que la vida de los estudiantes puede ser ocupada y a menudo impredecible. La modalidad híbrida permite a nuestros estudiantes asistir a clases en persona o participar en línea según sus necesidades individuales, lo que facilita el equilibrio entre sus responsabilidades académicas y personales."
-            imageUrl="/carousel/ebsite.png"
+            imageUrl="/inicio/computacion.png"
             imagePosition="left"
             buttonText="Conocer a los coordinadores"
             buttonLink="/coordinacion"
@@ -72,7 +72,7 @@ export default function Inicio() {
           <MissionText
             title="Colaboración y Comunidad"
             content="Fomentamos la colaboración entre estudiantes, profesores y la industria. Nuestro entorno híbrido promueve la interacción tanto en línea como en el aula, permitiendo a los estudiantes aprender y compartir ideas con sus compañeros y expertos en el campo de la computación."
-            imageUrl="/carousel/ebsite.png"
+            imageUrl="/inicio/trabajo-en-equipo.png"
             imagePosition="right"
             buttonText="Conocer la plantilla"
             buttonLink="/profesores"
