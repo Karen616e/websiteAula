@@ -7,10 +7,10 @@ import {
   FaYoutube,
 } from "react-icons/fa6";
 import { Outlet } from "react-router";
-import NavigationTabs from "../components/NavigationTabs"; // Asegúrate que la ruta sea correcta
+import NavigationForMain from "../components/NavigationForMain"; 
 
 export default function HeaderAndForMain() {
-  // --- LÓGICA DEL PARALLAX ---
+  // Lógica para el efecto parallax
   const [offsetY, setOffsetY] = useState(0);
   const handleScroll = () => setOffsetY(window.pageYOffset);
 
@@ -18,18 +18,20 @@ export default function HeaderAndForMain() {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
-  // --- FIN DE LÓGICA DEL PARALLAX ---
 
+  // Lógica para cambiar el fondo del header al hacer scroll
   const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
     const checkScroll = () => {
       setIsScrolled(window.scrollY > 10);
     };
+    checkScroll(); // Revisa el scroll al cargar
     window.addEventListener("scroll", checkScroll);
     return () => window.removeEventListener("scroll", checkScroll);
   }, []);
 
+  // Arrays de datos para el footer
   const interestSites = [
     { name: "ANFEI", link: "https://www.anfei.mx" },
     { name: "CACEI", link: "https://cacei.com.mx" },
@@ -45,22 +47,18 @@ export default function HeaderAndForMain() {
   ];
 
   return (
-    <div className="w-full">
-      {/* 1. IMAGEN DE FONDO CON PARALLAX POR TRANSFORMACIÓN */}
-      <div
-        className="fixed top-0 left-0 w-full h-screen bg-cover bg-center -z-10"
-        style={{
-          backgroundImage: "url('/main-page/cisco-main.jpg')",
-          // La clave del efecto: la imagen se mueve a la mitad de la velocidad del scroll.
-          // Puedes ajustar el valor '0.5' para cambiar la velocidad del efecto.
-          transform: `translateY(${offsetY * 0.5}px)`,
-        }}
-      />
+    // 'isolate' crea un nuevo contexto de apilamiento
+    <div className="w-full isolate">
+      
+      {/* 1. IMAGEN DE FONDO (YA NO ESTÁ AQUÍ, ESTÁ EN INICIO.TSX) */}
 
       {/* 2. HEADER STICKY */}
       <header
         className={`sticky top-0 z-50 transition-colors duration-300 ${
-          isScrolled ? "bg-gray-900 bg-opacity-90" : "bg-transparent"
+          // --- AQUÍ ESTÁ EL CAMBIO ---
+          // Cambiamos 'bg-transparent' por 'bg-black bg-opacity-30'
+          // para dar un fondo sutil al header en estado inicial.
+          isScrolled ? "bg-gray-900 bg-opacity-90" : "bg-black bg-opacity-30"
         } py-2`}
         style={{ height: "7rem" }}
       >
@@ -70,7 +68,7 @@ export default function HeaderAndForMain() {
             <img src="/EscudoFIBlanco.png" alt="Facultad de Ingeniería" className="h-24 w-auto"/>
           </div>
           <div>
-            <NavigationTabs />
+            <NavigationForMain />
           </div>
           <img src="/logo_CISCO.svg" alt="Aula Híbrida Cisco" className="h-12 w-auto md:h-20"/>
         </div>

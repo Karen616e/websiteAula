@@ -1,6 +1,6 @@
 @import "tailwindcss";
 
 /* Anulamos para corregir el parallax */
-#root {
-    overflow: clip;
-}
+/*#root {
+  overflow: clip;
+}*/
