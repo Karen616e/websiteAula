@@ -22,6 +22,21 @@ const tabs = [
       { name: "Profesores", href: "/profesores", icon: PencilIcon },
     ],
   },
+<<<<<<< Updated upstream
+=======
+  {
+    name: "Eventos",
+    icon: CalendarDaysIcon, // Icono principal del menú
+    children: [
+      { name: "Inauguración", href: "/eventos/inauguracion", icon: SparklesIcon },
+      { name: "AlgoRand", href: "/eventos/algorand", icon: SparklesIcon },
+      { name: "AlgoDay", href: "/eventos/algoday", icon: SparklesIcon },
+      { name: "Intersemestrales", href: "/eventos/intersemestrales", icon: AcademicCapIcon },
+    ],
+  },
+  // -------------------------
+  { name: "Ubicación", href: "/ubicacion", icon: MapPinIcon },
+>>>>>>> Stashed changes
 ];
 
 function classNames(...classes: string[]) {

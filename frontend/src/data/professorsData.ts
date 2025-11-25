@@ -37,28 +37,6 @@ const professors = [
   },
   {
     id: 4,
-    name: "ING. CARLOS SAUCEDO MACIEL",
-    position: "Profesor de Carrera Asociado",
-    description: `Ingeniero en Computación por la Facultad de Ingeniería de la UNAM (1991) y Maestro en Administración de Organizaciones (1997). Director Asociado de Impacto Social en Latinoamérica en Kyndryl y ex Gerente de Ciudadanía Corporativa en IBM de México, con experiencia en responsabilidad social corporativa y desarrollo de soluciones tecnológicas innovadoras.`,
-    email: "",
-    phoneNumber: "",
-    webSite: "",
-    imageUrl: "/professors/saucedo.jpg",
-    type: 2,
-  },
-  {
-    id: 5,
-    name: "Dr. Eduardo Espinosa Avila",
-    position: "Técnico académico",
-    description: `Ingeniero en Computación por la Facultad de Ingeniería de la UNAM (2005). Maestro (2009) y Doctor (2017) en Ciencias de la Computación en el Posgrado de Ciencias e Ingeniería de la Computación de la UNAM.`,
-    email: "",
-    phoneNumber: "",
-    webSite: "",
-    imageUrl: "/professors/eduardo.png",
-    type: 2,
-  },
-  {
-    id: 6,
     name: "Ing. Arturo Perez De la Cruz",
     position: "Profesor de Carrera Asociado",
     description: `Ingeniero en computación, egresado de la Facultad de Ingeniería en la UNAM, líder de proyecto en Virtual Mind Studio Apasionado por la tecnología, especialista en la computación gráfica, modelado 3D, texturizado, desarrollo de proyectos con realidad virtual y realidad aumentada.`,
@@ -68,28 +46,7 @@ const professors = [
     imageUrl: "/professors/arturo.jpeg",
     type: 2,
   },
-  {
-    id: 7,
-    name: "ING. Adrián Armenta Sequeira Cruz",
-    position: "Profesor responsable del curso de Blockchain CORE",
-    description: `Desarrollador full-stack con amplia experiencia en tecnologías blockchain y contratos inteligentes, especializado en el desarrollo de soluciones Web3 y aplicaciones descentralizadas. Experto en la creación e implementación de contratos inteligentes con Solidity y en el desarrollo de interfaces gráficas utilizando JavaScript y React.js.`,
-    email: "",
-    phoneNumber: "",
-    webSite: "",
-    imageUrl: "/professors/adrian.jpg",
-    type: 2,
-  },
-  {
-    id: 8,
-    name: "mtra. Naomi Itzel Reyes Granados",
-    position: "Profesor responsable del curso de Computación Cuántica",
-    description: `Realizó sus estudios de Maestría en el Posgrado de Ciencia e Ingeniería de la Computación en la UNAM, desarrollando una tesis sobre la implementación de un modelo de Campos Aleatorios de Markov para la eliminación de ruido en imágenes digitales mediante el paradigma adiabático de la computación cuántica.`,
-    email: "",
-    phoneNumber: "",
-    webSite: "",
-    imageUrl: "/professors/naomi.jpg",
-    type: 2,
-  },
+
 ];
 
 export default professors;
