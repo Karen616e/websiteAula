@@ -1,8 +1,8 @@
-import InformationCard from "../components/InformationCard";
-import professors from "../data/professorsData";
+import InformationCard from "../../components/InformationCard";
+import professors from "../../data/professorsData";
 
-export default function Coordinacion() {
-  const professor = professors.filter((professor) => professor.type === 1 || professor.type === 3);
+export default function Profesores() {
+  const professor = professors.filter((professor) => professor.type === 2 || professor.type === 3);
 
   return (
     <div className="container -my-10 mx-auto py-10">
@@ -18,5 +18,5 @@ export default function Coordinacion() {
         ))}
       </div>
     </div>
-  )
+  );
 }

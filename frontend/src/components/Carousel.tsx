@@ -2,11 +2,6 @@ import { useEffect, useState, useRef } from "react"
 // 1. Importamos Link
 import { Link } from "react-router-dom";
 
-<<<<<<< Updated upstream
-const images = [
-    "/public/carousel/CiscoPlaca.jpeg",
-    "/public/carousel/ebsite.png"
-=======
 // Definimos una interfaz para que TypeScript sepa qué forma tienen nuestros objetos (opcional pero recomendado)
 interface CarouselItem {
     src: string;
@@ -29,7 +24,6 @@ const carouselItems: CarouselItem[] = [
     { src: "/carousel/CiscoInicio4.png", alt: "Imagen del centro 4" },
     { src: "/carousel/CiscoInicio5.png", alt: "Imagen del centro 5" },
     { src: "/carousel/CiscoInicio6.png", alt: "Imagen del centro 6" }
->>>>>>> Stashed changes
 ]
 
 export default function Carousel(){
@@ -69,13 +63,6 @@ export default function Carousel(){
     return(
         <div className="flex flex-col items-center mt-20">
             <div
-<<<<<<< Updated upstream
-                className="w-full max-w-xl h-64 flex items-center justify-center bg-gray-100 rounded-lg overflow-hidden relative"
-                onMouseEnter={() => setIsHovered(true)}
-                onMouseLeave={() => setIsHovered(false)} 
-            >
-                <img src={images[current]} alt={`Imagen ${current + 1}`} className="object-contain h-fit w-fit" />
-=======
                 className="w-full max-w-5xl aspect-video flex items-center justify-center bg-gray-100 rounded-lg overflow-hidden relative"
                 onMouseEnter={() => setIsHovered(true)}
                 onMouseLeave={() => setIsHovered(false)} 
@@ -99,7 +86,6 @@ export default function Carousel(){
                         className="object-contain w-full h-full" 
                     />
                 )}
->>>>>>> Stashed changes
 
                 {isHovered && (
                     <>

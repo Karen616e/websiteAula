@@ -1,171 +1,162 @@
+// src/components/NavigationTabs.tsx
+import { useState, useRef, useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import {
   HomeIcon,
   AcademicCapIcon,
-  PencilIcon,
   BriefcaseIcon,
-  BuildingLibraryIcon,
-} from "@heroicons/react/20/solid";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+  CalendarIcon,
+  MapPinIcon,
+  ChevronDownIcon,
+  UserGroupIcon,
+  UsersIcon,
+  SparklesIcon,
+} from '@heroicons/react/24/solid';
 
-const tabs = [
-  { name: "Inicio", href: "/inicio", icon: HomeIcon },
-  { name: "Clases", href: "/clases", icon: AcademicCapIcon },
-  {
-    name: "Plantilla Educativa",
-    icon: BriefcaseIcon,
-    children: [
-      {
-        name: "Coordinación",
-        href: "/coordinacion",
-        icon: BuildingLibraryIcon,
-      },
-      { name: "Profesores", href: "/profesores", icon: PencilIcon },
-    ],
-  },
-<<<<<<< Updated upstream
-=======
-  {
-    name: "Eventos",
-    icon: CalendarDaysIcon, // Icono principal del menú
-    children: [
-      { name: "Inauguración", href: "/eventos/inauguracion", icon: SparklesIcon },
-      { name: "AlgoRand", href: "/eventos/algorand", icon: SparklesIcon },
-      { name: "AlgoDay", href: "/eventos/algoday", icon: SparklesIcon },
-      { name: "Intersemestrales", href: "/eventos/intersemestrales", icon: AcademicCapIcon },
-    ],
-  },
-  // -------------------------
-  { name: "Ubicación", href: "/ubicacion", icon: MapPinIcon },
->>>>>>> Stashed changes
-];
+type NavItem = {
+  name: string;
+  path?: string;
+  basePath?: string;
+  icon: any;
+  children?: { name: string; path: string; icon: any }[];
+};
 
-function classNames(...classes: string[]) {
-  return classes.filter(Boolean).join(" ");
-}
-
-export default function NavigationTabs() {
+const NavigationTabs = () => {
   const location = useLocation();
-  const navigate = useNavigate();
-  const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    navigate(e.target.value);
+  const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
+  
+  const timeoutRef = useRef<number | null>(null);
+
+  useEffect(() => {
+    return () => {
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current);
+      }
+    };
+  }, []);
+
+  const handleMouseEnter = (name: string) => {
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+      timeoutRef.current = null;
+    }
+    setActiveDropdown(name);
   };
+
+  const handleMouseLeave = () => {
+    timeoutRef.current = window.setTimeout(() => {
+      setActiveDropdown(null);
+      timeoutRef.current = null;
+    }, 300);
+  };
+
+
+  const tabs: NavItem[] = [
+    { name: 'Inicio', path: '/inicio', icon: HomeIcon },
+    { name: 'Clases', path: '/clases', icon: AcademicCapIcon },
+    { 
+      name: 'Plantilla Educativa', 
+      basePath: '/plantilla',
+      icon: BriefcaseIcon,
+      children: [
+        { name: 'Coordinación', path: '/plantilla/coordinacion', icon: UserGroupIcon },
+        { name: 'Profesores', path: '/plantilla/profesores', icon: UsersIcon },
+      ]
+    },
+    { 
+      name: 'Eventos', 
+      basePath: '/eventos',
+      icon: CalendarIcon,
+      children: [
+        { name: 'Intersemestrales', path: '/eventos/intersemestrales', icon: SparklesIcon },
+        { name: 'AlgoDay', path: '/eventos/algoday', icon: SparklesIcon },
+        { name: 'AlgoRand', path: '/eventos/algorand', icon: SparklesIcon },
+        { name: 'Inauguración', path: '/eventos/inauguracion', icon: SparklesIcon },
+      ]
+    },
+    { name: 'Ubicación', path: '/ubicacion', icon: MapPinIcon },
+  ];
+
+  // CAMBIO 1: Aumentar tamaño de texto base principal (de text-base a text-lg)
+  const baseClasses = "group inline-flex items-center px-3 py-2 text-lg font-medium rounded-md transition-colors duration-200 cursor-pointer";
+  const activeClasses = "text-cyan-500 bg-cyan-50";
+  const inactiveClasses = "text-gray-600 hover:text-gray-900 hover:bg-gray-100";
+
   return (
-    <>
-      <div className=" bg-[66ccff] mb-0.5"></div>
-      <div className="mb-1">
-        <div className="sm:hidden">
-          <label htmlFor="tabs" className="sr-only">
-            Select a tab
-          </label>
-          <select
-            id="tabs"
-            name="tabs"
-            className="block w-full rounded-md border-gray-300 focus:border-blue-500 focus:ring-blue-500"
-            onChange={handleChange}
-          >
-            {tabs.map((tab) =>
-              tab.children ? (
-                <optgroup label={tab.name} key={tab.name}>
-                  {tab.children.map((child) => (
-                    <option value={child.href} key={child.name}>
-                      {child.name}
-                    </option>
-                  ))}
-                </optgroup>
-              ) : (
-                <option value={tab.href} key={tab.name}>
-                  {tab.name}
-                </option>
-              )
-            )}
-          </select>
-        </div>
+    <nav className="flex space-x-6 lg:space-x-10 h-full items-center" aria-label="Tabs relative z-50">
+      {tabs.map((tab) => {
+        const Icon = tab.icon;
+        
+        let isActive = false;
+        if (tab.path) {
+          isActive = location.pathname.startsWith(tab.path);
+        } else if (tab.basePath) {
+          isActive = location.pathname.startsWith(tab.basePath);
+        }
 
-        <div className="hidden sm:block pb-0.5">
-          <nav className="flex justify-center" aria-label="Tabs">
-            {tabs.map((tab) =>
-              tab.children ? (
-                (() => {
-                  const isChildOpen = tab.children.some(
-                    (child) => location.pathname === child.href
-                  );
+        if (tab.children) {
+          return (
+            <div 
+              key={tab.name}
+              className="relative"
+              onMouseEnter={() => handleMouseEnter(tab.name)}
+              onMouseLeave={handleMouseLeave}
+            >
+              <div className={`${baseClasses} ${isActive ? activeClasses : inactiveClasses}`}>
+                {/* Aumentamos ligeramente el icono principal también */}
+                <Icon className={`-ml-0.5 mr-2 h-7 w-7 ${isActive ? 'text-cyan-500' : 'text-gray-400 group-hover:text-gray-500'}`} aria-hidden="true" />
+                <span>{tab.name}</span>
+                <ChevronDownIcon className={`ml-1 h-5 w-5 transition-transform ${activeDropdown === tab.name ? 'rotate-180' : ''} ${isActive ? 'text-cyan-500' : 'text-gray-400'}`} />
+              </div>
 
-                  return (
-                    <div
-                      key={tab.name}
-                      className={classNames(
-                        isChildOpen
-                          ? "border-[#66ccff] text-[#66ccff]"
-                          : "border-transparent text-gray-500 hover:text-gray-700",
-                        "relative group inline-flex items-center py-2 px-4 text-xl font-medium"
-                      )}
-                    >
-                      <tab.icon
-                        className={classNames(
-                          isChildOpen
-                            ? "text-[#66ccff]"
-                            : "text-gray-400 group-hover:text-gray-500",
-                          "-ml-0.5 mr-2 h-4 w-4"
-                        )}
-                        aria-hidden="true"
-                      />
-                      <span>{tab.name}</span>
-
-                      <div className="absolute left-0 top-full hidden group-hover:block bg-white border-0 rounded shadow z-10 min-w-[10rem]">
-                        {tab.children.map((child) => (
+              {activeDropdown === tab.name && (
+                <div className="absolute left-0 mt-1 pt-1 w-64 z-50">
+                  <div className="rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none overflow-hidden">
+                    <div className="py-1">
+                      {tab.children.map((child) => {
+                        const ChildIcon = child.icon;
+                        const isChildActive = location.pathname === child.path;
+                        return (
                           <Link
                             key={child.name}
-                            to={child.href}
-                            className={classNames(
-                              location.pathname === child.href
-                                ? "border-[#66ccff] text-[#66ccff]"
-                                : "border-transparent text-gray-500 hover:text-gray-700",
-                              "group inline-flex items-center py-2 px-4 text-xl font-medium"
-                            )}
+                            to={child.path}
+                            // CAMBIO 2: Mantener texto de submenú más pequeño (text-sm)
+                            className={`group flex items-center px-4 py-3 text-sm font-medium ${isChildActive ? 'bg-cyan-50 text-cyan-600' : 'text-gray-700 hover:bg-gray-100 hover:text-gray-900'}`}
                           >
-                            <child.icon
-                              className={classNames(
-                                location.pathname === child.href
-                                  ? "text-[#66ccff]"
-                                  : "text-gray-400 group-hover:text-gray-500",
-                                "-ml-0.5 mr-2 h-4 w-4"
-                              )}
-                              aria-hidden="true"
-                            />
-                            <span>{child.name}</span>
+                            <ChildIcon className={`mr-3 h-5 w-5 ${isChildActive ? 'text-cyan-500' : 'text-gray-400 group-hover:text-gray-500'}`} aria-hidden="true" />
+                            {child.name}
                           </Link>
-                        ))}
-                      </div>
+                        );
+                      })}
                     </div>
-                  );
-                })()
-              ) : (
-                <Link
-                  key={tab.name}
-                  to={tab.href}
-                  className={classNames(
-                    location.pathname === tab.href
-                      ? "border-[#66ccff] text-[#66ccff]"
-                      : "border-transparent text-gray-500 hover:text-gray-700",
-                    "group inline-flex items-center py-2 px-4 text-xl font-medium"
-                  )}
-                >
-                  <tab.icon
-                    className={classNames(
-                      location.pathname === tab.href
-                        ? "text-[#66ccff]"
-                        : "text-gray-400 group-hover:text-gray-500",
-                      "-ml-0.5 mr-2 h-4 w-4"
-                    )}
-                    aria-hidden="true"
-                  />
-                  <span>{tab.name}</span>
-                </Link>
-              )
-            )}
-          </nav>
-        </div>
-      </div>
-    </>
+                  </div>
+                </div>
+              )}
+            </div>
+          );
+        }
+
+        return (
+          <Link
+            key={tab.name}
+            to={tab.path!}
+            className={`${baseClasses} ${isActive ? activeClasses : inactiveClasses}`}
+            aria-current={isActive ? 'page' : undefined}
+          >
+            {/* Aumentamos ligeramente el icono principal también */}
+            <Icon
+              className={`
+                -ml-0.5 mr-2 h-7 w-7
+                ${isActive ? 'text-cyan-500' : 'text-gray-400 group-hover:text-gray-500'}
+              `}
+              aria-hidden="true"
+            />
+            <span>{tab.name}</span>
+          </Link>
+        );
+      })}
+    </nav>
   );
-}
+};
+
+export default NavigationTabs;
