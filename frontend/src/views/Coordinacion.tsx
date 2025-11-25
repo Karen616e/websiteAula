@@ -10,7 +10,6 @@ export default function Coordinacion() {
         {professor.map((professor) => (
           <InformationCard
             key={professor.id}
-            id={professor.id}
             name={professor.name.toUpperCase()}
             position={professor.position}
             description={professor.description}

@@ -9,6 +9,23 @@ import { Outlet } from "react-router";
 import NavigationTabs from "../components/NavigationTabs";
 
 export default function HeaderAndForMain() {
+<<<<<<< Updated upstream
+=======
+
+  // Lógica para cambiar el fondo del header al hacer scroll
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const checkScroll = () => {
+      setIsScrolled(window.scrollY > 10);
+    };
+    checkScroll();
+    window.addEventListener("scroll", checkScroll);
+    return () => window.removeEventListener("scroll", checkScroll);
+  }, []);
+
+  // Arrays de datos para el footer 
+>>>>>>> Stashed changes
   const interestSites = [
     {
       name: "ANFEI",
@@ -52,8 +69,14 @@ export default function HeaderAndForMain() {
   ];
 
   return (
+<<<<<<< Updated upstream
     <>
       {/* Parallax background in the header */}
+=======
+    <div className="w-full isolate">
+      
+      {/* HEADER STICKY */}
+>>>>>>> Stashed changes
       <header
         className="relative z-10 bg-transparent py-2"
         style={{
@@ -64,6 +87,7 @@ export default function HeaderAndForMain() {
           backgroundAttachment: "fixed",
         }}
       >
+<<<<<<< Updated upstream
         <div className="absolute inset-0 bg-black opacity-0"></div>
         <div className="mx-auto max-w-9/12 flex items-center md:justify-between relative z-20">
           <div className="hidden md:flex space-x-7">
@@ -77,6 +101,12 @@ export default function HeaderAndForMain() {
               alt="Facultad de Ingeniería"
               className="h-26 w-auto"
             />
+=======
+        <div className="mx-auto max-w-7xl flex items-center justify-between px-4 sm:px-6 lg:px-8 h-full">
+          <div className="hidden md:flex space-x-7 items-center">
+            <img src="/EscudoUNAMBlanco.png" alt="UNAM" className="h-24 w-auto"/>
+            <img src="/EscudoFIBlanco.png" alt="Facultad de Ingeniería" className="h-24 w-auto"/>
+>>>>>>> Stashed changes
           </div>
           <div className="relative z-30">
             <NavigationTabs />
@@ -88,6 +118,7 @@ export default function HeaderAndForMain() {
           />
         </div>
       </header>
+<<<<<<< Updated upstream
 
       <div className="bg-gray-100  min-h-screen py-2">
         <main className="mx-auto max-w p-10 md:p-0">
@@ -101,6 +132,17 @@ export default function HeaderAndForMain() {
 
       <footer className="w-full px-4 py-4 bg-gray-800 flex flex-col gap-4 text-white font-serif md:px-8">
         {/* Faculty Information */}
+=======
+      
+      <div className="relative z-10">
+        <main>
+          <Outlet />
+        </main>
+      </div>
+
+      {/* FOOTER (Sin cambios) */}
+      <footer className="relative z-10 w-full px-4 py-4 bg-gray-800 flex flex-col gap-4 text-white font-serif md:px-8">
+>>>>>>> Stashed changes
         <section className="flex flex-col gap-4 text-sm md:grid md:grid-cols-[1fr_2fr_1fr] md:gap-4">
           <div className="flex justify-center items-center">
             <img
