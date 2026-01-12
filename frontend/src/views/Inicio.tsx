@@ -22,7 +22,7 @@ export default function Inicio() {
           <h1 className="font-sans text-4xl md:text-6xl font-extrabold text-white mb-6">
             Aula Híbrida Cisco
           </h1>
-          <p className="font-sans text-lg md:text-2xl max-w-6xl font-extralight text-gray-200">
+          <p className="font-sans text-lg md:text-2xl max-w-6xl font-normal text-gray-200">
             Nuestra Aula Híbrida es un espacio de aprendizaje innovador diseñado para brindar
             una experiencia educativa de alta calidad que combina lo mejor de la enseñanza presencial
             como a distancia. Esta modalidad de enseñanza busca adaptarse a las necesidades
