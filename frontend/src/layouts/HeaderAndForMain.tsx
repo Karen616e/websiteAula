@@ -1,4 +1,3 @@
-// src/layouts/HeaderAndForMain.tsx
 import { useEffect, useState } from "react";
 import { LinkIcon } from "@heroicons/react/20/solid";
 import {
@@ -9,6 +8,7 @@ import {
 } from "react-icons/fa6";
 import { Outlet } from "react-router";
 import NavigationForMain from "../components/NavigationForMain"; 
+import ScrollToTopButton from "../components/ScrollToTopButton"; // <--- Botón Volver Arriba
 
 export default function HeaderAndForMain() {
   // Lógica para cambiar el fondo del header al hacer scroll
@@ -23,7 +23,6 @@ export default function HeaderAndForMain() {
     return () => window.removeEventListener("scroll", checkScroll);
   }, []);
 
-  // Arrays de datos para el footer
   const interestSites = [
     { name: "ANFEI", link: "https://www.anfei.mx" },
     { name: "CACEI", link: "https://cacei.com.mx" },
@@ -41,31 +40,28 @@ export default function HeaderAndForMain() {
   return (
     <div className="w-full isolate">
       
-      {/* HEADER STICKY */}
+      {/* --- HEADER STICKY (Oscuro/Transparente) --- */}
       <header
         className={`sticky top-0 z-50 transition-colors duration-300 ${
-          isScrolled ? "bg-gray-900 bg-opacity-90 backdrop-blur-sm" : "bg-black bg-opacity-30"
+          isScrolled ? "bg-gray-900 bg-opacity-90 backdrop-blur-sm shadow-lg" : "bg-black bg-opacity-30"
         } py-2`}
         style={{ height: "7rem" }}
       >
         <div className="mx-auto max-w-7xl flex items-center justify-between px-4 sm:px-6 lg:px-8 h-full">
           
-          {/* 1. SECCIÓN IZQUIERDA (Logos UNAM/FI) - Oculta en móvil */}
-          {/* Usamos w-1/4 para equilibrar el espacio con la derecha */}
+          {/* 1. SECCIÓN IZQUIERDA (Logos UNAM/FI) - Oculta en móvil para dar prioridad al botón Menú */}
           <div className="hidden md:flex space-x-7 items-center md:w-1/4">
             <img src="/EscudoUNAMBlanco.png" alt="UNAM" className="h-24 w-auto"/>
             <img src="/EscudoFIBlanco.png" alt="Facultad de Ingeniería" className="h-24 w-auto"/>
           </div>
 
           {/* 2. SECCIÓN CENTRAL (Navegación) */}
-          {/* flex-1 permite que ocupe el espacio disponible. 
-              justify-start en móvil para el botón hamburguesa, justify-center en desktop para el menú */}
+          {/* flex-1 toma el espacio sobrante. justify-start en móvil (para el botón), center en PC */}
           <div className="flex-1 flex justify-start md:justify-center">
             <NavigationForMain />
           </div>
 
           {/* 3. SECCIÓN DERECHA (Logo Cisco) */}
-          {/* w-1/4 en desktop para mantener simetría con la izquierda */}
           <div className="flex justify-end md:w-1/4">
             <img src="/logo_CISCO.svg" alt="Aula Híbrida Cisco" className="h-12 w-auto md:h-20"/>
           </div>
@@ -73,14 +69,15 @@ export default function HeaderAndForMain() {
         </div>
       </header>
       
-      {/* CONTENIDO PRINCIPAL */}
+      {/* --- CONTENIDO PRINCIPAL --- */}
       <div className="relative z-10">
         <main>
+          {/* Aquí NO ponemos Breadcrumbs porque es la portada */}
           <Outlet />
         </main>
       </div>
 
-      {/* FOOTER */}
+      {/* --- FOOTER --- */}
       <footer className="relative z-10 w-full px-4 py-4 bg-gray-800 flex flex-col gap-4 text-white font-serif md:px-8">
         <section className="flex flex-col gap-4 text-sm md:grid md:grid-cols-[1fr_2fr_1fr] md:gap-4">
           <div className="flex justify-center items-center">
@@ -109,7 +106,7 @@ export default function HeaderAndForMain() {
         <div className="w-full h-px bg-gray-700"></div>
         <section className="flex flex-col items-center gap-4 text-sm text-center md:flex-row md:justify-between md:text-left">
           <div className="md:flex-[0.6]">
-            Todos los derechos reservados Copyright © 2026 /
+            Todos los derechos reservados Copyright © 2025 /
             <a href="https://www.ingenieria.unam.mx/" target="_blank" rel="noopener noreferrer" className="hover:underline"> Facultad de Ingeniería </a>/
             <a href="https://www.unam.mx/" target="_blank" rel="noopener noreferrer" className="hover:underline"> UNAM </a>/
           </div>
@@ -122,6 +119,10 @@ export default function HeaderAndForMain() {
           </div>
         </section>
       </footer>
+
+      {/* --- BOTÓN VOLVER ARRIBA --- */}
+      <ScrollToTopButton />
+
     </div>
   );
 }

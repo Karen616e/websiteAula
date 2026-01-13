@@ -7,6 +7,8 @@ import {
 } from "react-icons/fa6";
 import { Outlet } from "react-router";
 import NavigationTabs from "../components/NavigationTabs";
+import Breadcrumbs from "../components/Breadcrumbs";     // <--- Breadcrumbs
+import ScrollToTopButton from "../components/ScrollToTopButton"; // <--- Botón Volver Arriba
 
 export default function HeaderAndFooter() {
   const interestSites = [
@@ -26,22 +28,17 @@ export default function HeaderAndFooter() {
   return (
     <div className="w-full font-sans">
       
-      {/* --- HEADER CORREGIDO --- */}
+      {/* --- HEADER SUPERIOR --- */}
       <header className="bg-gray-200 py-4">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          {/* CAMBIOS CLAVE:
-            1. flex-wrap: Permite que los elementos pasen a la siguiente línea si no caben.
-            2. md:flex-nowrap: En escritorio fuerza una sola línea.
-          */}
+          {/* Flex-wrap para que en móvil se acomoden en dos filas si es necesario */}
           <div className="flex flex-wrap items-center justify-between md:flex-nowrap gap-y-4">
             
             {/* 1. LOGOS IZQUIERDA (UNAM + FI) */}
-            {/* order-1: Primero en móvil y escritorio */}
             <div className="flex space-x-2 md:space-x-4 items-center order-1">
               <img
                 src="/Escudo-UNAM.png"
                 alt="Universidad Nacional Autónoma de México"
-                // Reduje h-20 a h-14 en móvil para dar espacio
                 className="h-14 md:h-24 w-auto"
               />
               <img
@@ -52,9 +49,6 @@ export default function HeaderAndFooter() {
             </div>
 
             {/* 2. LOGO CISCO (DERECHA) */}
-            {/* order-2: En móvil lo ponemos segundo (a la derecha de los escudos).
-               md:order-3: En escritorio lo mandamos al final (derecha extrema).
-            */}
             <div className="order-2 md:order-3">
               <img
                 src="/logo_CISCO.svg"
@@ -64,10 +58,6 @@ export default function HeaderAndFooter() {
             </div>
 
             {/* 3. TEXTO CENTRAL */}
-            {/* order-3: En móvil va al final (abajo).
-               md:order-2: En escritorio va en medio.
-               w-full: En móvil ocupa todo el ancho para forzar nueva línea.
-            */}
             <div className="text-center order-3 md:order-2 w-full md:w-auto md:flex-grow px-2 md:px-4">
               <h1 className="text-lg md:text-3xl font-bold text-blue-600 leading-tight">
                 Facultad de Ingeniería
@@ -79,8 +69,7 @@ export default function HeaderAndFooter() {
       </header>
 
       {/* --- NAVEGACIÓN STICKY --- */}
-      {/* Quitamos 'flex justify-center' para que el menú móvil ocupe todo el ancho */}
-      <div className="sticky top-0 z-40 bg-white py-2 border-b border-gray-200">
+      <div className="sticky top-0 z-40 bg-white py-2 border-b border-gray-200 shadow-sm">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 h-full">
           <NavigationTabs />
         </div>
@@ -89,11 +78,15 @@ export default function HeaderAndFooter() {
       {/* --- CONTENIDO PRINCIPAL --- */}
       <div className="bg-gray-50 min-h-screen py-8">
         <main className="mx-auto max-w-7xl p-4 md:p-0">
+          
+          {/* Breadcrumbs para navegación interna */}
+          <Breadcrumbs />
+          
           <Outlet />
         </main>
       </div>
 
-      {/* --- FOOTER (Sin cambios) --- */}
+      {/* --- FOOTER --- */}
       <footer className="w-full px-4 py-8 bg-gray-800 flex flex-col gap-8 text-white font-serif md:px-8">
         <section className="flex flex-col gap-4 text-sm md:grid md:grid-cols-[1fr_2fr_1fr] md:gap-8">
           <div className="flex flex-col items-center md:items-start">
@@ -138,6 +131,10 @@ export default function HeaderAndFooter() {
           </div>
         </section>
       </footer>
+
+      {/* --- BOTÓN VOLVER ARRIBA --- */}
+      <ScrollToTopButton />
+
     </div>
   );
 }
