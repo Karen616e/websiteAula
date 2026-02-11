@@ -1,6 +1,6 @@
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
-import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom';
+import { HashRouter, Route, Routes, Navigate } from 'react-router-dom';
 import './index.css';
 
 // --- LAYOUTS ---
@@ -30,7 +30,7 @@ import NotFound from './views/NotFound';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <BrowserRouter>
+    <HashRouter>
       
       {/* 2. IMPORTANTE: Colocamos ScrollToTop aquí, antes de las rutas */}
       {/* Esto asegura que cada vez que cambies de página, la vista empiece desde arriba */}
@@ -68,6 +68,6 @@ createRoot(document.getElementById('root')!).render(
         </Route>
 
       </Routes>
-    </BrowserRouter>
+    </HashRouter>
   </StrictMode>
 );
