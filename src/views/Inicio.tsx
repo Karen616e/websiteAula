@@ -15,7 +15,7 @@ export default function Inicio() {
         style={{ 
           backgroundImage: `
             linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-            url('/main-page/cisco-main.jpg')
+            url('/main-page/cisco-main.png')
           `
         }}
       >

@@ -32,10 +32,10 @@ const carouselItems: CarouselItem[] = [
     { type: 'image', src: "/carousel/CiscoInicio5.png", alt: "Imagen del centro 5" },
     { type: 'image', src: "/carousel/CiscoInicio6.png", alt: "Imagen del centro 6" },
     { type: 'video', src: "/carousel/ClasesAulaCisco.mp4", alt: "Video Info. clases impartidas" },
-    { type: 'video', src: "/carousel/InfoAulaCisco.MOV", alt: "Video Info. relaciones AulaCisco" },
-    { type: 'video', src: "/carousel/EquipamientoAulaCisco.MOV", alt: "Video Info. equipamiento del AulaCisco" },
-    { type: 'video', src: "/carousel/SiteAulaCisco.MOV", alt: "Video sobre Site AulaCisco" },
-    { type: 'video', src: "/carousel/ServicioAulaCisco.MOV", alt: "Video sobre Servicio Social AulaCisco" }
+    { type: 'video', src: "/carousel/InfoAulaCisco.mp4", alt: "Video Info. relaciones AulaCisco" },
+    { type: 'video', src: "/carousel/EquipamientoAulaCisco.mp4", alt: "Video Info. equipamiento del AulaCisco" },
+    { type: 'video', src: "/carousel/SiteAulaCisco.mp4", alt: "Video sobre Site AulaCisco" },
+    { type: 'video', src: "/carousel/ServicioAulaCisco.mp4", alt: "Video sobre Servicio Social AulaCisco" }
 ]
 
 function VideoPlayer({ src, title, isActive }: { src: string, title: string, isActive: boolean }) {
