@@ -51,7 +51,7 @@ export default function HeaderAndFooter() {
             {/* 2. LOGO CISCO (DERECHA) */}
             <div className="order-2 md:order-3">
               <img
-                src="/logo_CISCO.svg"
+                src="/logo_CISCO_2.svg"
                 alt="Aula Híbrida Cisco"
                 className="h-10 md:h-20 w-auto"
               />
