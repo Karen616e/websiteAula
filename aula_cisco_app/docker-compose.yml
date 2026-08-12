@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+  db:
+    image: mariadb:10.11
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword_seguro_123
+      MYSQL_DATABASE: aula_cisco
+      MYSQL_USER: cisco_admin
+      MYSQL_PASSWORD: holahola
+    volumes:
+      - mariadb_data:/var/lib/mysql
+
+  web:
+      build: .
+      restart: always
+      ports:
+        - "5000:5000"
+      environment:
+        - DB_HOST=db
+      depends_on:
+        - db
+
+volumes:
+  mariadb_data:
