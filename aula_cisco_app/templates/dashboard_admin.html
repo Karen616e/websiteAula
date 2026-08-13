@@ -5,69 +5,146 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Administración - Aula Cisco</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
 </head>
-<body class="bg-gray-50 min-h-screen">
-    <!-- Navbar -->
+<body class="bg-gray-50 min-h-screen relative">
     <nav class="bg-blue-900 text-white shadow-lg">
-        <div class="max-w-6xl mx-auto px-4 py-3 flex justify-between items-center">
+        <div class="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
             <span class="font-bold text-xl tracking-tight">Admin | Aula Cisco</span>
             <div class="space-x-4">
-                <a href="{{ url_for('registrar_alumno') }}" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded transition font-medium">+ Alta Prestador</a>
+                <a href="{{ url_for('exportar_csv') }}" class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded transition font-medium">⬇️ Exportar CSV</a>
+                <a href="{{ url_for('registrar_prestador') }}" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded transition font-medium">+ Alta Prestador</a>
                 <a href="{{ url_for('logout') }}" class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded transition font-medium">Cerrar Sesión</a>
             </div>
         </div>
     </nav>
 
-    <!-- Contenido -->
-    <main class="max-w-6xl mx-auto mt-8 px-4">
-        {% with messages = get_flashed_messages(with_categories=true) %}
-          {% if messages %}
-            {% for category, message in messages %}
-              {% if category == 'success' %}
-                <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-6">{{ message }}</div>
+    <main class="max-w-7xl mx-auto mt-8 px-4 grid grid-cols-1 lg:grid-cols-4 gap-6">
+        <div class="lg:col-span-3 bg-white rounded-xl shadow-md overflow-hidden p-6">
+            {% with messages = get_flashed_messages(with_categories=true) %}
+              {% if messages %}
+                {% for category, message in messages %}
+                    <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-6">{{ message }}</div>
+                {% endfor %}
               {% endif %}
-            {% endfor %}
-          {% endif %}
-        {% endwith %}
+            {% endwith %}
 
-        <div class="bg-white rounded-xl shadow-md overflow-hidden">
-            <div class="p-6 border-b border-gray-200">
-                <h2 class="text-2xl font-bold text-gray-800">Prestadores de Servicio Social</h2>
-            </div>
+            <h2 class="text-2xl font-bold text-gray-800 mb-6">Prestadores de Servicio Social</h2>
             
-            <div class="overflow-x-auto">
-                <table class="w-full text-left border-collapse">
-                    <thead>
-                        <tr class="bg-gray-100 text-gray-600 uppercase text-sm leading-normal">
-                            <th class="py-3 px-6">Matrícula</th>
-                            <th class="py-3 px-6">Nombre</th>
-                            <th class="py-3 px-6 text-center">Horas</th>
-                            <th class="py-3 px-6 text-center">Estado</th>
-                        </tr>
-                    </thead>
-                    <tbody class="text-gray-600 text-sm font-light">
-                        {% for alumno in alumnos %}
-                        <tr class="border-b border-gray-200 hover:bg-gray-50">
-                            <td class="py-3 px-6 font-medium">{{ alumno.numero_cuenta }}</td>
-                            <td class="py-3 px-6">{{ alumno.nombre }}</td>
-                            <td class="py-3 px-6 text-center font-bold text-blue-900">{{ "%.2f"|format(alumno.horas_acumuladas) }}</td>
-                            <td class="py-3 px-6 text-center">
-                                {% if alumno.id in activos_ids %}
-                                    <span class="bg-green-200 text-green-800 py-1 px-3 rounded-full text-xs font-bold">En Aula</span>
-                                {% else %}
-                                    <span class="bg-gray-200 text-gray-600 py-1 px-3 rounded-full text-xs font-bold">Fuera</span>
-                                {% endif %}
-                            </td>
-                        </tr>
-                        {% else %}
-                        <tr>
-                            <td colspan="4" class="py-8 text-center text-gray-500">No hay prestadores registrados aún.</td>
-                        </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-            </div>
+            <table id="tablaPrestadores" class="display w-full text-left border-collapse">
+                <thead>
+                    <tr class="bg-gray-100 text-gray-600 text-sm">
+                        <th class="py-3 px-4">Matrícula</th>
+                        <th class="py-3 px-4">Nombre</th>
+                        <th class="py-3 px-4 text-center">Modalidad</th>
+                        <th class="py-3 px-4 text-center">Horas</th>
+                        <th class="py-3 px-4 text-center">Estado</th>
+                        <th class="py-3 px-4 text-center">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody class="text-gray-600 text-sm">
+                    {% for alumno in alumnos %}
+                    <tr class="border-b">
+                        <td class="py-3 px-4 font-medium">{{ alumno.numero_cuenta }}</td>
+                        <td class="py-3 px-4">
+                            {{ alumno.nombre }}
+                            <span class="block text-xs text-gray-400">Inició: {{ alumno.fecha_inicio.strftime('%d/%m/%Y') if alumno.fecha_inicio else 'N/D' }}</span>
+                        </td>
+                        <td class="py-3 px-4 text-center">{{ '6 Meses' if alumno.modalidad == '6_meses' else '1 Año' }}</td>
+                        <td class="py-3 px-4 text-center font-bold text-blue-900" data-order="{{ alumno.horas_acumuladas }}">{{ (alumno.horas_acumuladas * 3600) | formato_tiempo }}</td>
+                        <td class="py-3 px-4 text-center">
+                            {% if alumno.id in activos_ids %}
+                                <span class="bg-green-200 text-green-800 py-1 px-3 rounded-full text-xs font-bold">En Aula</span>
+                            {% else %}
+                                <span class="bg-gray-200 text-gray-600 py-1 px-3 rounded-full text-xs font-bold">Fuera</span>
+                            {% endif %}
+                        </td>
+                        <td class="py-3 px-4 text-center">
+                            <div class="flex flex-col space-y-3">
+                                <div class="flex justify-center space-x-2">
+                                    <a href="{{ url_for('detalle_prestador', id=alumno.id) }}" class="bg-blue-100 text-blue-700 hover:bg-blue-200 font-bold px-3 py-1 rounded text-xs transition">Ver Perfil</a>
+                                    
+                                    <!-- Botón que abre el nuevo Modal -->
+                                    <button type="button" onclick="abrirModalHoras({{ alumno.id }}, '{{ alumno.nombre }}')" class="bg-yellow-100 text-yellow-700 hover:bg-yellow-200 font-bold px-3 py-1 rounded text-xs transition">+ Horas</button>
+                                </div>
+                                <div class="pt-2 border-t border-gray-100">
+                                    <form action="{{ url_for('eliminar_prestador', id=alumno.id) }}" method="POST" onsubmit="return confirm('ATENCIÓN: Se eliminará al prestador y todo su historial. ¿Continuar?');">
+                                        <button type="submit" class="text-red-400 hover:text-red-700 font-bold text-xs underline transition">Dar de baja</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <div class="bg-white rounded-xl shadow-md p-6 h-fit">
+            <h3 class="text-lg font-bold text-gray-800 mb-4">Distribución de Modalidad</h3>
+            <canvas id="graficaModalidad"></canvas>
         </div>
     </main>
+
+    <!-- Fondo Oscuro del Modal -->
+    <div id="modalHoras" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+        <!-- Tarjeta Blanca -->
+        <div class="bg-white rounded-xl p-6 w-full max-w-sm shadow-2xl border border-gray-100">
+            <h3 class="text-xl font-bold text-gray-800 mb-1">Añadir Tiempo</h3>
+            <p class="text-sm text-gray-500 mb-6">Sumar horas a <span id="modalNombrePrestador" class="font-bold text-blue-700"></span></p>
+            
+            <form id="formAgregarHoras" method="POST" action="">
+                <div class="grid grid-cols-3 gap-3 mb-6">
+                    <div>
+                        <label class="block text-xs font-semibold uppercase text-gray-600 mb-1 text-center">Hrs</label>
+                        <input type="number" name="horas" min="0" value="0" class="w-full px-3 py-2 border border-gray-300 rounded-md outline-none focus:ring-blue-500 focus:border-blue-500 text-center font-bold text-lg">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold uppercase text-gray-600 mb-1 text-center">Min</label>
+                        <input type="number" name="minutos" min="0" max="59" value="0" class="w-full px-3 py-2 border border-gray-300 rounded-md outline-none focus:ring-blue-500 focus:border-blue-500 text-center font-bold text-lg">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold uppercase text-gray-600 mb-1 text-center">Seg</label>
+                        <input type="number" name="segundos" min="0" max="59" value="0" class="w-full px-3 py-2 border border-gray-300 rounded-md outline-none focus:ring-blue-500 focus:border-blue-500 text-center font-bold text-lg">
+                    </div>
+                </div>
+                
+                <div class="flex justify-end space-x-3">
+                    <button type="button" onclick="cerrarModalHoras()" class="px-4 py-2 bg-gray-100 text-gray-700 font-medium rounded-md hover:bg-gray-200 transition">Cancelar</button>
+                    <button type="submit" class="px-4 py-2 bg-green-600 text-white font-medium rounded-md hover:bg-green-700 transition">Guardar Tiempo</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(function() {
+            $('#tablaPrestadores').DataTable({
+                "language": { "url": "//cdn.datatables.net/plug-ins/1.13.6/i18n/es-MX.json" },
+                "order": [[ 3, "desc" ]]
+            });
+        });
+
+        const chartData = {{ grafica_data|safe }};
+        new Chart(document.getElementById('graficaModalidad'), {
+            type: 'doughnut',
+            data: { labels: chartData.labels, datasets: [{ data: chartData.datos, backgroundColor: ['#2563eb', '#16a34a'], borderWidth: 0 }] }
+        });
+
+        // Funciones para el Modal
+        function abrirModalHoras(id, nombre) {
+            document.getElementById('modalNombrePrestador').innerText = nombre;
+            document.getElementById('formAgregarHoras').action = '/agregar-horas/' + id;
+            document.getElementById('modalHoras').classList.remove('hidden');
+        }
+
+        function cerrarModalHoras() {
+            document.getElementById('modalHoras').classList.add('hidden');
+            document.getElementById('formAgregarHoras').reset(); // Regresa los números a cero
+        }
+    </script>
 </body>
 </html>
