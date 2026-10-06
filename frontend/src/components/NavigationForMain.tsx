@@ -12,6 +12,7 @@ import {
   Bars3Icon,
   XMarkIcon,
   ChevronDownIcon,
+  DocumentTextIcon,
 } from "@heroicons/react/20/solid";
 
 const tabs = [
@@ -33,6 +34,14 @@ const tabs = [
       { name: "AlgoRand", href: "/eventos/algorand", icon: SparklesIcon },
       { name: "AlgoDay", href: "/eventos/algoday", icon: SparklesIcon },
       { name: "Intersemestrales", href: "/eventos/intersemestrales", icon: AcademicCapIcon },
+    ],
+  },
+  {
+    name: "Reglamentos",
+    icon: DocumentTextIcon,
+    children: [
+      { name: "Reglamento general de uso de laboratorios y taller", href: "/reglamentos/laboratorios", icon: DocumentTextIcon },
+      { name: "Reglamento de Aula Híbrida CISCO", href: "/reglamentos/aula-hibrida", icon: DocumentTextIcon },
     ],
   },
   { name: "Ubicación", href: "/ubicacion", icon: MapPinIcon },

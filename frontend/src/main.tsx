@@ -28,6 +28,9 @@ import Profesores from './views/plantilla/Profesores';
 // Errores
 import NotFound from './views/NotFound';
 
+// Reglamentos
+import ReglamentoLaboratorios from './views/reglamentos/ReglamentoLaboratorios';
+import ReglamentoAulaHibrida from './views/reglamentos/ReglamentoAulaHibrida';
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <HashRouter>
@@ -64,6 +67,10 @@ createRoot(document.getElementById('root')!).render(
           {/* El '*' atrapa cualquier ruta que no coincida con las anteriores */}
           {/* IMPORTANTE: Debe ir al final de este grupo */}
           <Route path="*" element={<NotFound />} />
+
+          {/* Rutas de Reglamentos */}
+          <Route path="reglamentos/laboratorios" element={<ReglamentoLaboratorios />} />
+          <Route path="reglamentos/aula-hibrida" element={<ReglamentoAulaHibrida />} />
           
         </Route>
 
