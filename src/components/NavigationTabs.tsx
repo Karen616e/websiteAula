@@ -10,6 +10,7 @@ import {
   UserGroupIcon,
   UsersIcon,
   SparklesIcon,
+  DocumentTextIcon,
   Bars3Icon, // Icono hamburguesa (abrir)
   XMarkIcon, // Icono cerrar
 } from '@heroicons/react/24/solid';
@@ -97,6 +98,15 @@ const NavigationTabs = () => {
         { name: 'AlgoDay', path: '/eventos/algoday', icon: SparklesIcon },
         { name: 'AlgoRand', path: '/eventos/algorand', icon: SparklesIcon },
         { name: 'Inauguración', path: '/eventos/inauguracion', icon: SparklesIcon },
+      ]
+    },
+    {
+      name: 'Reglamentos',
+      basePath: '/reglamentos',
+      icon: DocumentTextIcon,
+      children: [
+        { name: 'Reglamento general de uso de laboratorios y taller', path: '/reglamentos/laboratorios', icon: DocumentTextIcon },
+        { name: 'Reglamento de Aula Híbrida CISCO', path: '/reglamentos/aula-hibrida', icon: DocumentTextIcon },
       ]
     },
     { name: 'Ubicación', path: '/ubicacion', icon: MapPinIcon },
@@ -251,4 +261,4 @@ const NavigationTabs = () => {
   );
 };
 
-export default NavigationTabs;
+export default NavigationTabs;  

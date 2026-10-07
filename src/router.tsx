@@ -12,6 +12,8 @@ import AlgoDay from "./views/eventos/AlgoDay";
 import AlgoRand from "./views/eventos/AlgoRand";
 import Inauguracion from "./views/eventos/Inauguracion";
 import Intersemestrales from "./views/eventos/Intersemestrales";
+import ReglamentoLaboratorios from "./views/reglamentos/ReglamentoLaboratorios";
+import ReglamentoAulaHibrida from "./views/reglamentos/ReglamentoAulaHibrida";
 
 // 1. IMPORTAMOS EL NUEVO COMPONENTE
 import ScrollToTop from "./components/ScrollToTop";
@@ -47,6 +49,10 @@ export default function Router(){
                 <Route path='/eventos/algorand' element={<AlgoRand />} />
                 <Route path='/eventos/inauguracion' element={<Inauguracion />} />
                 <Route path='/eventos/intersemestrales' element={<Intersemestrales />} />
+
+                {/* --- RUTAS DE REGLAMENTOS --- */}
+                <Route path='/reglamentos/laboratorios' element={<ReglamentoLaboratorios />} />
+                <Route path='/reglamentos/aula-hibrida' element={<ReglamentoAulaHibrida />} />
             </Route>
 
             {/* Ruta catch-all para errores 404, redirige a inicio */}

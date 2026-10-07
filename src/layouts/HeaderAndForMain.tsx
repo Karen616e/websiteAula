@@ -57,7 +57,7 @@ export default function HeaderAndForMain() {
 
           {/* 2. SECCIÓN CENTRAL (Navegación) */}
           {/* flex-1 toma el espacio sobrante. justify-start en móvil (para el botón), center en PC */}
-          <div className="flex-1 flex justify-start md:justify-center">
+          <div className="flex-1 flex justify-start md:justify-center px-4 md:ml-12">
             <NavigationForMain />
           </div>
 
