@@ -86,13 +86,16 @@ const ClaseModal = ({ clase, onClose }: ClaseModalProps) => {
               </p>
             </div>
 
+            {/* --- SECCIÓN DE HORARIO CORREGIDA --- */}
             <div>
               <h5 className="text-lg font-bold text-gray-900 mb-3 flex items-center">
                 <span className="mr-2">⏰</span> Horario
               </h5>
-              <p className="text-gray-700 font-medium flex items-center bg-gray-100 p-4 rounded-md inline-block text-md">
-                {clase.schedule}
-              </p>
+              <div className="text-gray-700 font-medium bg-gray-100 p-4 rounded-md flex flex-col gap-2">
+                {clase.schedule.map((horario, index) => (
+                  <p key={index}>{horario}</p>
+                ))}
+              </div>
             </div>
 
             {/* === SECCIÓN DE BOTONES === */}
