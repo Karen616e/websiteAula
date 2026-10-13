@@ -31,8 +31,8 @@ const tabs = [
     icon: CalendarDaysIcon,
     children: [
       { name: "Inauguración", href: "/eventos/inauguracion", icon: SparklesIcon },
-      { name: "AlgoRand", href: "/eventos/algorand", icon: SparklesIcon },
-      { name: "AlgoDay", href: "/eventos/algoday", icon: SparklesIcon },
+      { name: "MCYRA", href: "/eventos/algorand", icon: SparklesIcon },
+      { name: "Curso JavaScript y TypeScript", href: "/eventos/algoday", icon: SparklesIcon },
       { name: "Intersemestrales", href: "/eventos/intersemestrales", icon: AcademicCapIcon },
     ],
   },

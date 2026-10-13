@@ -95,8 +95,8 @@ const NavigationTabs = () => {
       icon: CalendarIcon,
       children: [
         { name: 'Intersemestrales', path: '/eventos/intersemestrales', icon: SparklesIcon },
-        { name: 'AlgoDay', path: '/eventos/algoday', icon: SparklesIcon },
-        { name: 'AlgoRand', path: '/eventos/algorand', icon: SparklesIcon },
+        { name: 'Curso JavaScript y TypeScript', path: '/eventos/algoday', icon: SparklesIcon },
+        { name: 'MCYRA', path: '/eventos/algorand', icon: SparklesIcon },
         { name: 'Inauguración', path: '/eventos/inauguracion', icon: SparklesIcon },
       ]
     },
